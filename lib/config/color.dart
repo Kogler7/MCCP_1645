@@ -9,7 +9,7 @@ class KColor {
   static const Color secondaryHighlightColor = Colors.deepOrange; //默认次要颜色（强调）
   static const Color tipColor = Colors.lightGreen; //默认提示颜色
   static const Color tipHighlightColor = Colors.greenAccent; //默认提示颜色（强调）
-  static const Color backGround = Color(0xFFFFF5E2); //默认背景颜色
+  static const Color darkBackGround = Color(0xff050B18); //默认背景颜色
   // Test
   static const Color defaultTextColor = Colors.redAccent; //默认文本颜色
   static const Color defaultButtonColor = Colors.redAccent; //默认按钮颜色
