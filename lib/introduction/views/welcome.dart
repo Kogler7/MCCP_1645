@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mccp_1645/introduction/utils/step_target.dart';
 
 import '../../config/index.dart';
 import '../utils/direct_animation.dart';
+import '../utils/image_box.dart';
 
 class WelcomeView extends StatelessWidget {
   final AnimationController animationController;
@@ -12,71 +14,58 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firstHalfAnimation = buildOffsetTweenStepAnimation(
+    final _imageInAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex,
-      direction: Directions.leftwardIn,
-    );
-    final _secondHalfAnimation = buildOffsetTweenStepAnimation(
-      controller: animationController,
-      startIndex: startIndex + 1, //有什么用？+1
-      direction: Directions.leftwardOut,
-    );
-    final _welcomeFirstHalfAnimation = buildOffsetTweenStepAnimation(
-      controller: animationController,
-      startIndex: startIndex,
-      direction: Directions.leftwardIn,
+      direction: Directions.downwardIn,
       speedFactor: 2.0,
     );
-    final _welcomeImageAnimation = buildOffsetTweenStepAnimation(
+    final _titleInAnimation = buildOffsetTweenStepAnimation(
+      controller: animationController,
+      startIndex: startIndex,
+      direction: Directions.rightwardIn,
+      speedFactor: 3.0,
+    );
+    final _textInAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex,
       direction: Directions.leftwardIn,
-      speedFactor: 4.0,
     );
 
-    return SlideTransition(
-      position: _firstHalfAnimation,
-      child: SlideTransition(
-        position: _secondHalfAnimation,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 100),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SlideTransition(
-                position: _welcomeImageAnimation,
-                child: Container(
-                  constraints:
-                      const BoxConstraints(maxWidth: 350, maxHeight: 350),
-                  child: const Image(
-                    image: KIntroImage.welcome,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              SlideTransition(
-                position: _welcomeFirstHalfAnimation,
-                child: const Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Text(
-                    KIntroString.welcomeTitle,
-                    style: KTextStyle.titleBold,
-                  ),
-                ),
-              ),
-              const Padding(
-                padding:
-                    EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SlideTransition(
+          position: _imageInAnimation,
+          child: const ImageBox(image: KIntroImage.welcome),
+        ),
+        SlideTransition(
+          position: _titleInAnimation,
+          child: const Padding(
+            padding: EdgeInsets.only(top: 16),
+            child: SizedBox(
+              width: double.infinity,
+              child: Center(
                 child: Text(
-                  KIntroString.welcomeText,
-                  textAlign: TextAlign.center,
+                  KIntroString.welcomeTitle,
+                  style: KTextStyle.titleBold,
                 ),
               ),
-            ],
+            ),
           ),
         ),
-      ),
+        SlideTransition(
+          position: _textInAnimation,
+          child: const Padding(
+            padding:
+                EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 32),
+            child: Text(
+              KIntroString.welcomeText,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

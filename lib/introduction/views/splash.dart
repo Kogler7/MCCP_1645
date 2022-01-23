@@ -14,66 +14,139 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  final int startIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    final _titleInAnimation = buildOffsetTweenStepAnimation(
+      controller: widget.animationController,
+      startIndex: startIndex,
+      direction: Directions.upwardIn,
+      speedFactor: 1.0,
+    );
+    final _titleOutAnimation = buildOffsetTweenStepAnimation(
+      controller: widget.animationController,
+      startIndex: startIndex + 1,
+      direction: Directions.leftwardOut,
+    );
+    final _textInAnimation = buildOffsetTweenStepAnimation(
+      controller: widget.animationController,
+      startIndex: startIndex,
+      direction: Directions.upwardIn,
+      speedFactor: 2.0,
+    );
+    final _textOutAnimation = buildOffsetTweenStepAnimation(
+      controller: widget.animationController,
+      startIndex: startIndex + 1,
+      direction: Directions.rightwardOut,
+      speedFactor: 2.0,
+    );
+    final _imageInAnimation = buildOffsetTweenStepAnimation(
+      controller: widget.animationController,
+      startIndex: startIndex,
+      direction: Directions.downwardIn,
+      speedFactor: 4.0,
+    );
+    final _imageOutAnimation = buildOffsetTweenStepAnimation(
+      controller: widget.animationController,
+      startIndex: startIndex + 1,
+      direction: Directions.upwardOut,
+      speedFactor: 4.0,
+    );
+    final _buttonInAnimation = buildOffsetTweenStepAnimation(
+      controller: widget.animationController,
+      startIndex: startIndex,
+      direction: Directions.upwardIn,
+      speedFactor: 4.0,
+    );
+    final _buttonOutAnimation = buildOffsetTweenStepAnimation(
+      controller: widget.animationController,
+      startIndex: startIndex + 1,
+      direction: Directions.downwardOut,
+      speedFactor: 3.0,
+    );
     final _splashInAnimation = buildOffsetTweenStepAnimation(
       controller: widget.animationController,
-      startIndex: 0,
+      startIndex: startIndex,
       direction: Directions.upwardIn,
     );
     final _splashOutAnimation = buildOffsetTweenStepAnimation(
       controller: widget.animationController,
-      startIndex: 1,
+      startIndex: startIndex + 1,
       direction: Directions.upwardOut,
     );
-    return SlideTransition(
-      position: _splashInAnimation,
-      child: SlideTransition(
-        position: _splashOutAnimation,
-        child: SingleChildScrollView(
-          child: Column(
-            children: buildItems(context),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SlideTransition(
+            position: _imageInAnimation,
+            child: SlideTransition(
+              position: _imageOutAnimation,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: const Image(
+                    image: KIntroImage.splash,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
           ),
-        ),
+          SlideTransition(
+            position: _splashInAnimation,
+            child: Column(
+              children: [
+                SlideTransition(
+                  position: _titleInAnimation,
+                  child: SlideTransition(
+                    position: _titleOutAnimation,
+                    child: const SizedBox(
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          KIntroString.splashTitle,
+                          style: KTextStyle.titleBold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SlideTransition(
+                  position: _textInAnimation,
+                  child: SlideTransition(
+                    position: _textOutAnimation,
+                    child: const Padding(
+                      padding: EdgeInsets.only(
+                          left: 64, right: 64, top: 16, bottom: 16),
+                      child: Text(
+                        KIntroString.splashText,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+                SlideTransition(
+                  position: _buttonInAnimation,
+                  child: SlideTransition(
+                    position: _buttonOutAnimation,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: 32,
+                        bottom: MediaQuery.of(context).padding.bottom + 16,
+                      ),
+                      child: ButtonBegin(controller: widget.animationController),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
-
-  List<Widget> buildItems(BuildContext context) => [
-        const SizedBox(
-          height: 100,
-          width: double.infinity,
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: const Image(
-            image: KIntroImage.splash,
-            fit: BoxFit.cover,
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-          child: Text(
-            KIntroString.splashTitle,
-            style: KTextStyle.titleBold,
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 64, right: 64),
-          child: Text(
-            KIntroString.splashText,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        const SizedBox(
-          height: 48,
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).padding.bottom + 16),
-          child: ButtonBegin(controller: widget.animationController),
-        ),
-      ];
 }
 
 class ButtonBegin extends StatelessWidget {

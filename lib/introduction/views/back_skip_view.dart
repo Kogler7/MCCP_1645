@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mccp_1645/config/index.dart';
 
 import '../utils/direct_animation.dart';
 
@@ -51,7 +52,13 @@ class TopBackSkipView extends StatelessWidget {
                   position: _skipAnimation,
                   child: IconButton(
                     onPressed: onSkipClick,
-                    icon: const Text('Skip'),
+                    icon: const Text(
+                      'Skip',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
               ],

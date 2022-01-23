@@ -1,11 +1,13 @@
+import 'dart:math';
+
 ///存储各动画目标
 List<double> stepTargets = [
   0.0,
-  0.1,
-  0.28,//0.2;2
-  0.46,//0.4;3
-  0.64,//0.6;4
-  0.82,//0.8;5
+  0.2,
+  0.36, //0.2;2
+  0.52, //0.4;3
+  0.68, //0.6;4
+  0.84, //0.8;5
   1.0,
 ];
 
@@ -15,6 +17,11 @@ double getMidStepTarget(int idx1, int idx2) {
 
 bool isBetweenSteps(double value, int idx1, int idx2) {
   return value >= stepTargets[idx1] && value <= stepTargets[idx2];
+}
+
+bool isBetweenMidSteps(double value, int idx1, int idx2) {
+  return value >= getMidStepTarget(idx1 - 1, idx1) &&
+      value <= getMidStepTarget(idx2 - 1, idx2);
 }
 
 double getNextStepTgt(double nw) {

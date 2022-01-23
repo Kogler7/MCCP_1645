@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mccp_1645/config/color.dart';
 import 'package:mccp_1645/introduction/utils/step_target.dart';
 
+import '../../config/string/intro.dart';
 import 'direct_animation.dart';
 
 class NavigateButton extends StatelessWidget {
@@ -58,7 +59,7 @@ class NavigateButton extends StatelessWidget {
           ),
           buildSignUpSlideTransition(_topMoveAnimation, _signUpMoveAnimation),
           Padding(
-            padding: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.only(bottom: 32),
             child: buildLoginSlideTransition(_loginTextMoveAnimation),
           ),
         ],
@@ -66,104 +67,103 @@ class NavigateButton extends StatelessWidget {
     );
   }
 
-  SlideTransition buildLoginSlideTransition(Animation<Offset> _loginTextMoveAnimation) {
+  SlideTransition buildLoginSlideTransition(
+      Animation<Offset> _loginTextMoveAnimation) {
     return SlideTransition(
-            position: _loginTextMoveAnimation,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'Already have an account? ',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                Text(
-                  'Login',
-                  style: TextStyle(
-                    color: Color(0xff132137),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          );
-  }
-
-  SlideTransition buildSignUpSlideTransition(Animation<Offset> _topMoveAnimation, Animation<double> _signUpMoveAnimation) {
-    return SlideTransition(
-          position: _topMoveAnimation,
-          child: AnimatedBuilder(
-            animation: animationController,
-            builder: (context, child) => Padding(
-              padding: EdgeInsets.only(
-                  bottom: 44 - (38 * _signUpMoveAnimation.value)),
-              child: Container(
-                height: 58,
-                width: 58 + (200 * _signUpMoveAnimation.value),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  color: KColor.darkButton,
-                ),
-                child: PageTransitionSwitcher(
-                  duration: const Duration(milliseconds: 480),
-                  reverse:
-                      _signUpMoveAnimation.value < getMidStepTarget(4, 5),
-                  transitionBuilder: (
-                    Widget child,
-                    Animation<double> animation,
-                    Animation<double> secondaryAnimation,
-                  ) {
-                    return SharedAxisTransition(
-                      fillColor: Colors.transparent,
-                      child: child,
-                      animation: animation,
-                      secondaryAnimation: secondaryAnimation,
-                      transitionType: SharedAxisTransitionType.vertical,
-                    );
-                  },
-                  child: _signUpMoveAnimation.value > getMidStepTarget(4, 5)
-                      ? InkWell(
-                          key: const ValueKey('Sign Up button'),
-                          onTap: onNextClick,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 16.0, right: 16.0),
-                            child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Icon(Icons.arrow_forward_rounded,
-                                    color: Colors.white),
-                              ],
-                            ),
-                          ),
-                        )
-                      : InkWell(
-                          key: const ValueKey('next button'),
-                          onTap: onNextClick,
-                          child: const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Icon(Icons.arrow_forward_ios_rounded,
-                                color: Colors.white),
-                          ),
-                        ),
-                ),
-              ),
+      position: _loginTextMoveAnimation,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Text(
+            KIntroString.alreadyHaveAccount,
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
             ),
           ),
-        );
+          Text(
+            KIntroString.logIn,
+            style: TextStyle(
+              color: KColor.darkButton,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  SlideTransition buildSignUpSlideTransition(
+      Animation<Offset> _topMoveAnimation,
+      Animation<double> _signUpMoveAnimation) {
+    return SlideTransition(
+      position: _topMoveAnimation,
+      child: AnimatedBuilder(
+        animation: animationController,
+        builder: (context, child) => Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: Container(
+            height: 58,
+            width: 58 + (200 * _signUpMoveAnimation.value),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(32),
+              color: KColor.darkButton,
+            ),
+            child: PageTransitionSwitcher(
+              duration: const Duration(milliseconds: 480),
+              reverse: _signUpMoveAnimation.value < getMidStepTarget(4, 5),
+              transitionBuilder: (
+                Widget child,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+              ) {
+                return SharedAxisTransition(
+                  fillColor: Colors.transparent,
+                  child: child,
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.vertical,
+                );
+              },
+              child: _signUpMoveAnimation.value > getMidStepTarget(4, 5)
+                  ? InkWell(
+                      key: const ValueKey('Sign Up button'),
+                      onTap: onNextClick,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Icon(Icons.arrow_forward_rounded,
+                                color: Colors.white),
+                          ],
+                        ),
+                      ),
+                    )
+                  : InkWell(
+                      key: const ValueKey('next button'),
+                      onTap: onNextClick,
+                      child: const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Icon(Icons.arrow_forward_ios_rounded,
+                            color: Colors.white),
+                      ),
+                    ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _pageView() {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../config/index.dart';
 import '../utils/direct_animation.dart';
+import '../utils/image_box.dart';
 
 class ForthView extends StatelessWidget {
   final AnimationController animationController;
@@ -12,85 +13,83 @@ class ForthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firstHalfAnimation = buildOffsetTweenStepAnimation(
+    final _textInAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex,
       direction: Directions.leftwardIn,
     );
-    final _secondHalfAnimation = buildOffsetTweenStepAnimation(
+    final _textOutAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex + 1,
       direction: Directions.leftwardOut,
     );
-    final _moodFirstHalfAnimation = buildOffsetTweenStepAnimation(
+    final _titleInAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex,
       direction: Directions.leftwardIn,
       speedFactor: 2.0,
     );
-    final _moodSecondHalfAnimation = buildOffsetTweenStepAnimation(
+    final _titleOutAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex + 1,
       direction: Directions.leftwardOut,
       speedFactor: 2.0,
     );
-    final _imageFirstHalfAnimation = buildOffsetTweenStepAnimation(
+    final _imageInAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex,
       direction: Directions.leftwardIn,
       speedFactor: 4.0,
     );
-    final _imageSecondHalfAnimation = buildOffsetTweenStepAnimation(
+    final _imageOutAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex + 1,
       direction: Directions.leftwardOut,
       speedFactor: 4.0,
     );
 
-    return SlideTransition(
-      position: _firstHalfAnimation,
-      child: SlideTransition(
-        position: _secondHalfAnimation,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 100),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                KIntroString.forthTitle,
-                style: KTextStyle.titleBold,
-              ),
-              SlideTransition(
-                position: _moodFirstHalfAnimation,
-                child: SlideTransition(
-                  position: _moodSecondHalfAnimation,
-                  child: const Padding(
-                    padding: EdgeInsets.only(
-                        left: 64, right: 64, top: 16, bottom: 16),
-                    child: Text(
-                      KIntroString.forthText,
-                      textAlign: TextAlign.center,
-                    ),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SlideTransition(
+            position: _textOutAnimation,
+            child: SlideTransition(
+              position: _textInAnimation,
+              child: const SizedBox(
+                width: double.infinity,
+                child: Center(
+                  child: Text(
+                    KIntroString.forthTitle,
+                    style: KTextStyle.titleBold,
                   ),
                 ),
               ),
-              SlideTransition(
-                position: _imageFirstHalfAnimation,
-                child: SlideTransition(
-                  position: _imageSecondHalfAnimation,
-                  child: Container(
-                    constraints:
-                        const BoxConstraints(maxWidth: 350, maxHeight: 250),
-                    child: const Image(
-                      image: KIntroImage.forth,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          SlideTransition(
+            position: _titleOutAnimation,
+            child: SlideTransition(
+              position: _titleInAnimation,
+              child: const Padding(
+                padding: EdgeInsets.only(
+                    left: 64, right: 64, top: 16),
+                child: Text(
+                  KIntroString.forthText,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),
+          SlideTransition(
+            position: _imageOutAnimation,
+            child: SlideTransition(
+              position: _imageInAnimation,
+              child: const ImageBox(image:KIntroImage.forth),
+            ),
+          ),
+        ],
       ),
     );
   }

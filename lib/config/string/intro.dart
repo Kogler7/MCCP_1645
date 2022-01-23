@@ -6,14 +6,28 @@ class KIntroString {
       ' All rights reserved. ';
 
   //Introduction
-  static const String splashTitle = 'SplashHere';
-  static const String splashText = '枝上柳绵吹又少。天涯何处无芳草。——蝶恋花·春景';
-  static const String secondTitle = 'SecondHere';
-  static const String secondText = '人生自是有情痴，此恨不关风与月。——玉楼春·尊前拟把归期说';
-  static const String thirdTitle = 'ThirdHere';
-  static const String thirdText = '伤心桥下春波绿，曾是惊鸿照影来。——《沈园二首》(其一)';
-  static const String forthTitle = 'ForthHere';
-  static const String forthText = '明年此日青云去，却笑人间举子忙。——鹧鸪天·送廓之秋试';
-  static const String welcomeTitle = 'Welcome';
-  static const String welcomeText = '无情最是台城柳，依旧烟笼十里堤。——台城';
+  static const String splashTitle = '你好。';
+  static const String splashText = '也许我刚好遇见了热爱音乐的你。';
+  static const String secondTitle = '很高兴遇见你';
+  static const String secondText = '让我猜猜你擅长哪种乐器。是淳朴而又高贵的钢琴吗？';
+  static const String thirdTitle = '希望能和你一起';
+  static const String thirdText = '我们希望创建一个音乐爱好者社区，聚集起像你这样闪闪发光的人。';
+  static const String forthTitle = '探寻无限可能';
+  static const String forthText = '你可曾听见他们的声音？还有他们同样的对音乐的热爱。';
+  static const String welcomeTitle = '欢迎加入我们！';
+  static const String welcomeText = '让我们携手前进，共创美好未来。';
+  static const List<String> poems = [
+    '枝上柳绵吹又少。天涯何处无芳草。',
+    '——蝶恋花·春景',
+    '伤心桥下春波绿，曾是惊鸿照影来。',
+    '——《沈园二首》(其一)',
+    '明年此日青云去，却笑人间举子忙。',
+    '——鹧鸪天·送廓之秋试',
+    '',
+    '',
+  ];
+
+  //information
+  static const String alreadyHaveAccount = 'Already have an account? ';
+  static const String logIn = 'Login';
 }
