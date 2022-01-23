@@ -1,5 +1,6 @@
 ///自定义动态底部导航栏
 import 'package:flutter/material.dart';
+import 'package:mccp_1645/config/color.dart';
 
 class AnimatedBottomBar extends StatelessWidget {
   final int selectedIndex;
@@ -9,10 +10,8 @@ class AnimatedBottomBar extends StatelessWidget {
   final Duration animateDuration;
   final List<AnimatedBarItem> items;
   final ValueChanged<int> onItemSelected;
-  final MainAxisAlignment mainAxisAlignment;
   final double itemCornerRadius;
   final double containerHeight;
-  final Curve curve;
 
   const AnimatedBottomBar({
     Key? key,
@@ -23,10 +22,8 @@ class AnimatedBottomBar extends StatelessWidget {
     this.animateDuration = const Duration(milliseconds: 200),
     required this.items,
     required this.onItemSelected,
-    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.itemCornerRadius = 24,
     this.containerHeight = 48,
-    this.curve = Curves.easeInOut,
   })  : assert(items.length >= 2 && items.length <= 5),
         super(key: key);
 
@@ -53,10 +50,10 @@ class AnimatedBottomBar extends StatelessWidget {
           child: Container(
             width: double.infinity,
             height: containerHeight,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             //最外层水平边距加高了一点，避免边上图标有与屏幕边缘贴边的感觉，也让图标之间更紧凑些
             child: Row(
-              mainAxisAlignment: mainAxisAlignment,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(
                 items.length,
                 (index) => GestureDetector(
@@ -67,7 +64,6 @@ class AnimatedBottomBar extends StatelessWidget {
                     animateDuration: animateDuration,
                     itemCornerRadius: itemCornerRadius,
                     iconSize: iconSize,
-                    curve: curve,
                   ),
                   onTap: () {
                     onItemSelected(index);
@@ -89,7 +85,6 @@ class _ItemWidget extends StatelessWidget {
   final Color backgroundColor;
   final double itemCornerRadius;
   final Duration animateDuration;
-  final Curve curve;
 
   const _ItemWidget({
     Key? key,
@@ -99,7 +94,6 @@ class _ItemWidget extends StatelessWidget {
     required this.backgroundColor,
     required this.itemCornerRadius,
     required this.animateDuration,
-    this.curve = Curves.easeInOut,
   }) : super(key: key);
 
   @override
@@ -112,49 +106,42 @@ class _ItemWidget extends StatelessWidget {
         width: isSelected ? 100 : 50,
         height: double.maxFinite,
         duration: animateDuration,
-        curve: curve,
+        curve: Curves.easeInOut,
         decoration: BoxDecoration(
-          color:
-              isSelected ? item.activeColor.withOpacity(0.2) : backgroundColor,
+          color: isSelected
+              ? item.activeColor.withOpacity(0.2)
+              : backgroundColor.withOpacity(0),
           borderRadius: BorderRadius.circular(itemCornerRadius),
         ),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          physics: const NeverScrollableScrollPhysics(),
-          child: Container(
-            width: isSelected ? 100 : 50,
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                IconTheme(
-                  data: IconThemeData(
-                      size: iconSize,
-                      color: isSelected
-                          ? item.activeColor.withOpacity(1)
-                          : (item.inactiveColor ?? item.activeColor)),
-                  child: item.icon,
+        child: Container(
+          width: isSelected ? 100 : 50,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            children: [
+              IconTheme(
+                data: IconThemeData(
+                  size: iconSize,
+                  color: isSelected ? item.activeColor : item.inactiveColor,
                 ),
-                isSelected
-                    ? Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: DefaultTextStyle.merge(
-                            child: item.title,
-                            style: TextStyle(
-                              color: item.activeColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            maxLines: 1,
-                            textAlign: item.textAlign,
+                child: item.icon,
+              ),
+              isSelected
+                  ? Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: DefaultTextStyle.merge(
+                          child: item.title,
+                          style: TextStyle(
+                            color: item.activeColor,
+                            fontWeight: FontWeight.bold,
                           ),
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
                         ),
-                      )
-                    : const Text('')
-              ],
-            ),
+                      ),
+                    )
+                  : const Text('')
+            ],
           ),
         ),
       ),
@@ -167,13 +154,11 @@ class AnimatedBarItem {
   final Widget title;
   final Color activeColor;
   final Color inactiveColor;
-  final TextAlign textAlign;
 
   AnimatedBarItem({
     required this.icon,
     required this.title,
     this.activeColor = Colors.blue,
     this.inactiveColor = Colors.grey,
-    this.textAlign = TextAlign.center,
   });
 }
