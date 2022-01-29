@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mccp_1645/introduction/utils/step_target.dart';
+import 'package:mccp_1645/module/intro/utils/step_target.dart';
 
 enum Directions {
   leftwardIn,

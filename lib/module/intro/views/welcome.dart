@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mccp_1645/introduction/utils/step_target.dart';
+import 'package:mccp_1645/module/intro/utils/step_target.dart';
 
-import '../../config/index.dart';
+import '../../../config/export.dart';
 import '../utils/direct_animation.dart';
 import '../utils/image_box.dart';
 

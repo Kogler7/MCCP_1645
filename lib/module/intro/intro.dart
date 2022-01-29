@@ -2,14 +2,16 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mccp_1645/config/index.dart';
-import 'package:mccp_1645/introduction/utils/step_target.dart';
+import 'package:get/get.dart';
+import 'package:mccp_1645/config/export.dart';
+import 'package:mccp_1645/module/intro/utils/step_target.dart';
 
+import '../../route/export.dart';
 import 'views/third_view.dart';
 import 'utils/navigate_button.dart';
 import 'views/forth_view.dart';
 import 'views/second_view.dart';
-import 'views/splash.dart';
+import 'views/greeting.dart';
 import 'views/back_skip_view.dart';
 import 'views/welcome.dart';
 
@@ -55,7 +57,7 @@ class _AnimatedIntroductionScreenState extends State<AnimatedIntroductionScreen>
       body: ClipRect(
         child: Stack(
           children: [
-            SplashView(animationController: _controller!),
+            GreetingView(animationController: _controller!),
             SecondView(animationController: _controller!),
             ThirdView(animationController: _controller!),
             ForthView(animationController: _controller!),
@@ -150,6 +152,6 @@ class _AnimatedIntroductionScreenState extends State<AnimatedIntroductionScreen>
   }
 
   void _signUpClick() {
-    Navigator.pop(context);
+    Get.offNamed(Routes.home);
   }
 }

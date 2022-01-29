@@ -1,9 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:mccp_1645/config/color.dart';
-import 'package:mccp_1645/introduction/utils/step_target.dart';
+import 'package:mccp_1645/module/intro/utils/step_target.dart';
 
-import '../../config/string/intro.dart';
+import '../../../config/string/intro.dart';
 import 'direct_animation.dart';
 
 class NavigateButton extends StatelessWidget {
@@ -137,7 +137,7 @@ class NavigateButton extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: const [
                             Text(
-                              'Sign Up',
+                              KIntroString.signUp,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,

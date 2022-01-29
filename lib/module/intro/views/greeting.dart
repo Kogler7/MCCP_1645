@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mccp_1645/config/index.dart';
-import 'package:mccp_1645/introduction/utils/direct_animation.dart';
-import 'package:mccp_1645/introduction/utils/step_target.dart';
+import 'package:mccp_1645/config/export.dart';
+import 'package:mccp_1645/module/intro/utils/direct_animation.dart';
+import 'package:mccp_1645/module/intro/utils/step_target.dart';
 
-class SplashView extends StatefulWidget {
+class GreetingView extends StatefulWidget {
   final AnimationController animationController;
 
-  const SplashView({Key? key, required this.animationController})
+  const GreetingView({Key? key, required this.animationController})
       : super(key: key);
 
   @override
-  _SplashViewState createState() => _SplashViewState();
+  _GreetingViewState createState() => _GreetingViewState();
 }
 
-class _SplashViewState extends State<SplashView> {
+class _GreetingViewState extends State<GreetingView> {
   final int startIndex = 0;
 
   @override
@@ -70,11 +70,6 @@ class _SplashViewState extends State<SplashView> {
       startIndex: startIndex,
       direction: Directions.upwardIn,
     );
-    final _splashOutAnimation = buildOffsetTweenStepAnimation(
-      controller: widget.animationController,
-      startIndex: startIndex + 1,
-      direction: Directions.upwardOut,
-    );
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -87,7 +82,7 @@ class _SplashViewState extends State<SplashView> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: const Image(
-                    image: KIntroImage.splash,
+                    image: KIntroImage.greeting,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -106,7 +101,7 @@ class _SplashViewState extends State<SplashView> {
                       width: double.infinity,
                       child: Center(
                         child: Text(
-                          KIntroString.splashTitle,
+                          KIntroString.greetingTitle,
                           style: KTextStyle.titleBold,
                         ),
                       ),
@@ -121,7 +116,7 @@ class _SplashViewState extends State<SplashView> {
                       padding: EdgeInsets.only(
                           left: 64, right: 64, top: 16, bottom: 16),
                       child: Text(
-                        KIntroString.splashText,
+                        KIntroString.greetingText,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -176,7 +171,7 @@ class ButtonBegin extends StatelessWidget {
           color: KColor.darkButton,
         ),
         child: const Text(
-          "Let's begin",
+          KIntroString.letUsBegin,
           style: TextStyle(
             fontSize: 18,
             color: Colors.white,

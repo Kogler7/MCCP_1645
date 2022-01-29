@@ -6,8 +6,8 @@ class KIntroString {
       ' All rights reserved. ';
 
   //Introduction
-  static const String splashTitle = '你好。';
-  static const String splashText = '也许我刚好遇见了热爱音乐的你。';
+  static const String greetingTitle = '你好';
+  static const String greetingText = '也许我刚好遇见了热爱音乐的你。';
   static const String secondTitle = '很高兴遇见你';
   static const String secondText = '让我猜猜你擅长哪种乐器。是淳朴而又高贵的钢琴吗？';
   static const String thirdTitle = '希望能和你一起';
@@ -28,6 +28,9 @@ class KIntroString {
   ];
 
   //information
-  static const String alreadyHaveAccount = 'Already have an account? ';
-  static const String logIn = 'Login';
+  static const String letUsBegin = '开始体验';
+  static const String signUp = '注册';
+  static const String skip = '跳过';
+  static const String alreadyHaveAccount = '已有账户？ ';
+  static const String logIn = '登录';
 }

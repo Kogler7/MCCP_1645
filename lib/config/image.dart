@@ -10,9 +10,9 @@ class AuthAvatar {
 }
 ///Introduction
 class KIntroImage{
-  static const AssetImage splash = AssetImage('assets/introduction/splash.png');
-  static const AssetImage second = AssetImage('assets/introduction/second.png');
-  static const AssetImage third = AssetImage('assets/introduction/third.png');
-  static const AssetImage forth = AssetImage('assets/introduction/forth.png');
-  static const AssetImage welcome = AssetImage('assets/introduction/welcome.png');
+  static const AssetImage greeting = AssetImage('assets/intro/greeting.png');
+  static const AssetImage second = AssetImage('assets/intro/second.png');
+  static const AssetImage third = AssetImage('assets/intro/third.png');
+  static const AssetImage forth = AssetImage('assets/intro/forth.png');
+  static const AssetImage welcome = AssetImage('assets/intro/welcome.png');
 }

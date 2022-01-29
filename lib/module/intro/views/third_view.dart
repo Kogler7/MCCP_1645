@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mccp_1645/module/intro/utils/direct_animation.dart';
 
-import '../../config/index.dart';
-import '../utils/direct_animation.dart';
+import '../../../config/export.dart';
 import '../utils/image_box.dart';
 
-class ForthView extends StatelessWidget {
+class ThirdView extends StatelessWidget {
   final AnimationController animationController;
-  final int startIndex = 3;
+  final int startIndex = 2;
 
-  const ForthView({Key? key, required this.animationController})
+  const ThirdView({Key? key, required this.animationController})
       : super(key: key);
 
   @override
@@ -35,6 +35,7 @@ class ForthView extends StatelessWidget {
       direction: Directions.leftwardOut,
       speedFactor: 2.0,
     );
+
     final _imageInAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex,
@@ -49,19 +50,26 @@ class ForthView extends StatelessWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(bottom: 100),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SlideTransition(
-            position: _textOutAnimation,
+            position: _imageInAnimation,
             child: SlideTransition(
-              position: _textInAnimation,
+              position: _imageOutAnimation,
+              child: const ImageBox(image: KIntroImage.third),
+            ),
+          ),
+          SlideTransition(
+            position: _titleInAnimation,
+            child: SlideTransition(
+              position: _titleOutAnimation,
               child: const SizedBox(
                 width: double.infinity,
                 child: Center(
                   child: Text(
-                    KIntroString.forthTitle,
+                    KIntroString.thirdTitle,
                     style: KTextStyle.titleBold,
                   ),
                 ),
@@ -69,24 +77,17 @@ class ForthView extends StatelessWidget {
             ),
           ),
           SlideTransition(
-            position: _titleOutAnimation,
+            position: _textInAnimation,
             child: SlideTransition(
-              position: _titleInAnimation,
+              position: _textOutAnimation,
               child: const Padding(
-                padding: EdgeInsets.only(
-                    left: 64, right: 64, top: 16),
+                padding:
+                    EdgeInsets.only(left: 64, right: 64, bottom: 16, top: 16),
                 child: Text(
-                  KIntroString.forthText,
+                  KIntroString.thirdText,
                   textAlign: TextAlign.center,
                 ),
               ),
-            ),
-          ),
-          SlideTransition(
-            position: _imageOutAnimation,
-            child: SlideTransition(
-              position: _imageInAnimation,
-              child: const ImageBox(image:KIntroImage.forth),
             ),
           ),
         ],

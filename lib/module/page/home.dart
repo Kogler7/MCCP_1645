@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mccp_1645/config/color.dart';
 import 'package:mccp_1645/config/icon.dart';
-import 'package:mccp_1645/widget/animated_bar.dart';
+import 'package:mccp_1645/shared/widget/animated_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

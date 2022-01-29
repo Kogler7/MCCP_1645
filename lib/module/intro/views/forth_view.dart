@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mccp_1645/introduction/utils/direct_animation.dart';
 
-import '../../config/index.dart';
+import '../../../config/export.dart';
+import '../utils/direct_animation.dart';
 import '../utils/image_box.dart';
 
-class ThirdView extends StatelessWidget {
+class ForthView extends StatelessWidget {
   final AnimationController animationController;
-  final int startIndex = 2;
+  final int startIndex = 3;
 
-  const ThirdView({Key? key, required this.animationController})
+  const ForthView({Key? key, required this.animationController})
       : super(key: key);
 
   @override
@@ -35,7 +35,6 @@ class ThirdView extends StatelessWidget {
       direction: Directions.leftwardOut,
       speedFactor: 2.0,
     );
-
     final _imageInAnimation = buildOffsetTweenStepAnimation(
       controller: animationController,
       startIndex: startIndex,
@@ -50,26 +49,19 @@ class ThirdView extends StatelessWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 100),
+      padding: const EdgeInsets.only(bottom: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SlideTransition(
-            position: _imageInAnimation,
+            position: _textOutAnimation,
             child: SlideTransition(
-              position: _imageOutAnimation,
-              child: const ImageBox(image: KIntroImage.third),
-            ),
-          ),
-          SlideTransition(
-            position: _titleInAnimation,
-            child: SlideTransition(
-              position: _titleOutAnimation,
+              position: _textInAnimation,
               child: const SizedBox(
                 width: double.infinity,
                 child: Center(
                   child: Text(
-                    KIntroString.thirdTitle,
+                    KIntroString.forthTitle,
                     style: KTextStyle.titleBold,
                   ),
                 ),
@@ -77,17 +69,24 @@ class ThirdView extends StatelessWidget {
             ),
           ),
           SlideTransition(
-            position: _textInAnimation,
+            position: _titleOutAnimation,
             child: SlideTransition(
-              position: _textOutAnimation,
+              position: _titleInAnimation,
               child: const Padding(
-                padding:
-                    EdgeInsets.only(left: 64, right: 64, bottom: 16, top: 16),
+                padding: EdgeInsets.only(
+                    left: 64, right: 64, top: 16),
                 child: Text(
-                  KIntroString.thirdText,
+                  KIntroString.forthText,
                   textAlign: TextAlign.center,
                 ),
               ),
+            ),
+          ),
+          SlideTransition(
+            position: _imageOutAnimation,
+            child: SlideTransition(
+              position: _imageInAnimation,
+              child: const ImageBox(image:KIntroImage.forth),
             ),
           ),
         ],

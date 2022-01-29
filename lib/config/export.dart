@@ -4,3 +4,4 @@ export 'string/intro.dart';
 export 'icon.dart';
 export 'image.dart';
 export 'style.dart';
+export 'theme.dart';
