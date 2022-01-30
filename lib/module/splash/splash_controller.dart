@@ -1,15 +1,29 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mccp_1645/route/export.dart';
-class SplashController extends GetxController{
+
+class SplashController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  final _obj = ''.obs;
+  AnimationController? controller;
 
   @override
   void onInit() {
-    Future.delayed(const Duration(seconds: 1), () {
-      Get.offAllNamed(Routes.intro);
-    });
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 3000),
+    )
+      ..forward()
+      ..addListener(() {
+        obj = '正在加载${(100 * controller!.value).toStringAsFixed(2)}%';
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) Get.offAllNamed(Routes.intro);
+      });
     super.onInit();
   }
-  var _obj = ''.obs;
+
   set obj(value) => _obj.value = value;
+
   get obj => _obj.value;
 }

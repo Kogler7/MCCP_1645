@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
+import 'package:mccp_1645/config/binding.dart';
 import 'package:mccp_1645/module/intro/intro.dart';
 import 'package:mccp_1645/module/page/home.dart';
 import 'package:mccp_1645/module/splash/splash_page.dart';
-import '../module/splash/splash_bindings.dart';
 
 part 'routes.dart';
 
@@ -12,7 +12,7 @@ class AppPages {
     GetPage(
       name: Routes.splash,
       page: () => const SplashPage(),
-      binding: SplashBinding(),
+      binding: RootBinding(),
     ),
     GetPage(
       name: Routes.intro,

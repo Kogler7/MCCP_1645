@@ -80,7 +80,7 @@ class _AnimatedIntroductionScreenState extends State<AnimatedIntroductionScreen>
                   initialData: 0.0,
                   builder: (ctx, snap) {
                     double op = 0;
-                    double data = snap.data as double ?? 0.0;
+                    double data = snap.data as double? ?? 0.0;
                     double base = getLastStepTgt(data);
                     double ratio = (data - base - 0.16) / 0.16;
                     op = min(1 - sin(ratio * pi), 1.0);

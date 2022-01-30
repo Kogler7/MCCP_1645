@@ -1,5 +1,3 @@
-import 'dart:math';
-
 ///存储各动画目标
 List<double> stepTargets = [
   0.0,
