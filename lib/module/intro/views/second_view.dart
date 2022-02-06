@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mccp_1645/config/export.dart';
 
 import '../../../module/intro/utils/direct_animation.dart';
-import '../utils/image_box.dart';
+import '../widgets/image_box.dart';
 
 class SecondView extends StatelessWidget {
   final AnimationController animationController;

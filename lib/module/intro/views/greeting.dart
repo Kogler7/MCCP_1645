@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mccp_1645/config/export.dart';
 import 'package:mccp_1645/module/intro/utils/direct_animation.dart';
-import 'package:mccp_1645/module/intro/utils/step_target.dart';
+import 'package:mccp_1645/module/intro/utils/step_value.dart';
 
 class GreetingView extends StatefulWidget {
   final AnimationController animationController;
@@ -156,7 +156,7 @@ class ButtonBegin extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        controller.animateTo(stepTargets[2]);
+        controller.animateTo(Steps.values[2]);
       },
       child: Container(
         height: 58,

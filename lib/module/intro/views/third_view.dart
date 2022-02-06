@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mccp_1645/module/intro/utils/direct_animation.dart';
 
 import '../../../config/export.dart';
-import '../utils/image_box.dart';
+import '../widgets/image_box.dart';
 
 class ThirdView extends StatelessWidget {
   final AnimationController animationController;

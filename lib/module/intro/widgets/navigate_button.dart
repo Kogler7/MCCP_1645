@@ -1,10 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:mccp_1645/config/color.dart';
-import 'package:mccp_1645/module/intro/utils/step_target.dart';
+import 'package:mccp_1645/module/intro/utils/step_value.dart';
 
 import '../../../config/string/intro.dart';
-import 'direct_animation.dart';
+import '../utils/direct_animation.dart';
 
 class NavigateButton extends StatelessWidget {
   final AnimationController animationController;
@@ -26,8 +26,8 @@ class NavigateButton extends StatelessWidget {
         Tween<double>(begin: 0, end: 1.0).animate(CurvedAnimation(
       parent: animationController,
       curve: Interval(
-        stepTargets[4],
-        stepTargets[5],
+        Steps.values[4],
+        Steps.values[5],
         curve: Curves.fastOutSlowIn,
       ),
     ));
@@ -51,7 +51,7 @@ class NavigateButton extends StatelessWidget {
               animation: animationController,
               builder: (context, child) => AnimatedOpacity(
                 opacity:
-                    isBetweenSteps(animationController.value, 2, 4) ? 1 : 0,
+                    Steps.btwSteps(animationController.value, 2, 4) ? 1 : 0,
                 duration: const Duration(milliseconds: 480),
                 child: _pageView(),
               ),
@@ -113,7 +113,7 @@ class NavigateButton extends StatelessWidget {
             ),
             child: PageTransitionSwitcher(
               duration: const Duration(milliseconds: 480),
-              reverse: _signUpMoveAnimation.value < getMidStepTarget(4, 5),
+              reverse: _signUpMoveAnimation.value < Steps.midValueByStep(4, 5),
               transitionBuilder: (
                 Widget child,
                 Animation<double> animation,
@@ -127,7 +127,7 @@ class NavigateButton extends StatelessWidget {
                   transitionType: SharedAxisTransitionType.vertical,
                 );
               },
-              child: _signUpMoveAnimation.value > getMidStepTarget(4, 5)
+              child: _signUpMoveAnimation.value > Steps.midValueByStep(4, 5)
                   ? InkWell(
                       key: const ValueKey('Sign Up button'),
                       onTap: onNextClick,
@@ -169,13 +169,13 @@ class NavigateButton extends StatelessWidget {
   Widget _pageView() {
     int _selectedIndex = 0;
 
-    if (animationController.value >= getMidStepTarget(4, 5)) {
+    if (animationController.value >= Steps.midValueByStep(4, 5)) {
       _selectedIndex = 3;
-    } else if (animationController.value >= getMidStepTarget(3, 4)) {
+    } else if (animationController.value >= Steps.midValueByStep(3, 4)) {
       _selectedIndex = 2;
-    } else if (animationController.value >= getMidStepTarget(2, 3)) {
+    } else if (animationController.value >= Steps.midValueByStep(2, 3)) {
       _selectedIndex = 1;
-    } else if (animationController.value >= getMidStepTarget(1, 2)) {
+    } else if (animationController.value >= Steps.midValueByStep(1, 2)) {
       _selectedIndex = 0;
     }
 

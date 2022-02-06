@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mccp_1645/module/intro/utils/step_target.dart';
+import 'package:mccp_1645/module/intro/utils/step_value.dart';
 
 enum Directions {
   leftwardIn,
@@ -56,7 +56,7 @@ Animation<Offset> buildOffsetTweenStepAnimation({
   double speedFactor = 1.0,
   Curve curve = Curves.fastOutSlowIn,
 }) {
-  assert(startIndex + 1 < stepTargets.length);
+  assert(startIndex + 1 < Steps.values.length);
 
   PairedOffset offsets = PairedOffset(direction, speedFactor);
 
@@ -67,8 +67,8 @@ Animation<Offset> buildOffsetTweenStepAnimation({
     CurvedAnimation(
       parent: controller,
       curve: Interval(
-        stepTargets[startIndex++],
-        stepTargets[startIndex],
+        Steps.values[startIndex++],
+        Steps.values[startIndex],
         curve: curve,
       ),
     ),

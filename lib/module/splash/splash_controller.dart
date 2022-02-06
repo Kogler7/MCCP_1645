@@ -11,7 +11,7 @@ class SplashController extends GetxController
   void onInit() {
     controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 30),
     )
       ..forward()
       ..addListener(() {

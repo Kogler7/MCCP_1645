@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../config/export.dart';
 import '../utils/direct_animation.dart';
-import '../utils/image_box.dart';
+import '../widgets/image_box.dart';
 
 class WelcomeView extends StatelessWidget {
   final AnimationController animationController;

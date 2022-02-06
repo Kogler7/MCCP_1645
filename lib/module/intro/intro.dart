@@ -4,11 +4,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mccp_1645/config/export.dart';
-import 'package:mccp_1645/module/intro/utils/step_target.dart';
+import 'package:mccp_1645/module/intro/utils/step_value.dart';
 
 import '../../route/export.dart';
 import 'views/third_view.dart';
-import 'utils/navigate_button.dart';
+import 'widgets/navigate_button.dart';
 import 'views/forth_view.dart';
 import 'views/second_view.dart';
 import 'views/greeting.dart';
@@ -25,8 +25,8 @@ class AnimatedIntroductionScreen extends StatefulWidget {
 
 class _AnimatedIntroductionScreenState extends State<AnimatedIntroductionScreen>
     with TickerProviderStateMixin {
-  AnimationController? _controller;
-  final _streamController = StreamController();
+  AnimationController? _controller; //动画控制器
+  final _streamController = StreamController(); //诗句透明度局部刷新流控制器
 
   int poemIndex = 0;
 
@@ -36,9 +36,9 @@ class _AnimatedIntroductionScreenState extends State<AnimatedIntroductionScreen>
       vsync: this,
       duration: const Duration(seconds: 8), //动画总时长
     )
-      ..animateTo(0) //stepTargets[0]
-      ..animateTo(stepTargets[1])
+      ..animateTo(Steps.values[1])
       ..addListener(() {
+        //对于动画的每一帧，将帧值通过流传递给诗句透明度控制组件
         _streamController.sink.add(_controller?.value);
       });
     super.initState();
@@ -71,79 +71,85 @@ class _AnimatedIntroductionScreenState extends State<AnimatedIntroductionScreen>
               animationController: _controller!,
               onNextClick: _onNextClick,
             ),
-            Positioned(
-              bottom: 24,
-              left: 64,
-              right: 64,
-              child: StreamBuilder(
-                  stream: _streamController.stream,
-                  initialData: 0.0,
-                  builder: (ctx, snap) {
-                    double op = 0;
-                    double data = snap.data as double? ?? 0.0;
-                    double base = getLastStepTgt(data);
-                    double ratio = (data - base - 0.16) / 0.16;
-                    op = min(1 - sin(ratio * pi), 1.0);
-                    if (data <= getMidStepTarget(1, 2)) {
-                      op = 0;
-                    }
-                    if (isBetweenMidSteps(data, 2, 3)) {
-                      poemIndex = 0;
-                    } else if (isBetweenMidSteps(data, 3, 4)) {
-                      poemIndex = 1;
-                    } else if (isBetweenMidSteps(data, 4, 5)) {
-                      poemIndex = 2;
-                    } else {
-                      poemIndex = 3;
-                    }
-                    return Opacity(
-                      opacity: op,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            KIntroString.poems[poemIndex * 2],
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.black45,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              const Expanded(child: SizedBox()),
-                              Text(
-                                KIntroString.poems[poemIndex * 2 + 1],
-                                style: const TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black45,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-            ),
+            buildPoemsDisplay(),
           ],
         ),
       ),
     );
   }
 
+  Positioned buildPoemsDisplay() {
+    return Positioned(
+      bottom: 24,
+      left: 64,
+      right: 64,
+      child: StreamBuilder(
+          stream: _streamController.stream,
+          initialData: 0.0,
+          builder: (ctx, snap) {
+            double data = snap.data as double? ?? 0.0;
+            double opacity = calculateOpacity(data);
+            if (Steps.btwMidSteps(data, 2, 3)) {
+              poemIndex = 0;
+            } else if (Steps.btwMidSteps(data, 3, 4)) {
+              poemIndex = 1;
+            } else if (Steps.btwMidSteps(data, 4, 5)) {
+              poemIndex = 2;
+            } else {
+              poemIndex = 3;
+            }
+            return Opacity(
+              opacity: opacity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    KIntroString.poems[poemIndex * 2],
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      const Expanded(child: SizedBox()),
+                      Text(
+                        KIntroString.poems[poemIndex * 2 + 1],
+                        style: const TextStyle(
+                          fontSize: 10,
+                          color: Colors.black45,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }),
+    );
+  }
+
+  double calculateOpacity(double data) {
+    if (data <= Steps.midValueByStep(1, 2)) {
+      return 0;
+    } //1.5阶段之前完全隐藏
+    double ratio = Steps.ratioBtwSteps(data);
+    return min(1 - sin(ratio * pi), 1.0);
+  }
+
   void _onSkipClick() {
     _controller?.animateTo(
-      stepTargets[5],
+      Steps.values[5],
       duration: const Duration(milliseconds: 1200),
     );
   }
 
   void _onBackClick() {
-    _controller?.animateTo(getLastStepTgt(_controller!.value));
+    _controller?.animateTo(Steps.lastTargetValue(_controller!.value));
   }
 
   void _onNextClick() {
-    double target = getNextStepTgt(_controller!.value);
+    double target = Steps.nextTargetValue(_controller!.value);
     if (target == 1.0) {
       _signUpClick();
     } else {
