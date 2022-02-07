@@ -158,6 +158,6 @@ class _AnimatedIntroductionScreenState extends State<AnimatedIntroductionScreen>
   }
 
   void _signUpClick() {
-    Get.offNamed(Routes.home);
+    Get.offNamed(Routes.auth);
   }
 }

@@ -2,6 +2,7 @@
 /// Snapshot 22w03a belongs to Version 0.0.1 alpha 1.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mccp_1645/module/auth/welcom.dart';
 import 'package:mccp_1645/module/splash/splash_page.dart';
 import 'package:mccp_1645/route/export.dart';
 
@@ -22,7 +23,7 @@ class MusicalCoCreatingApp extends StatelessWidget {
       title: '1645',
       initialRoute: Routes.splash,
       initialBinding: RootBinding(),
-      defaultTransition: Transition.zoom,
+      defaultTransition: Transition.fade,
       getPages: AppPages.routes,
       theme: ThemeData(
         primarySwatch: Colors.blue,

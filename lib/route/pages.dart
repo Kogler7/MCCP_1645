@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:mccp_1645/config/binding.dart';
+import 'package:mccp_1645/module/auth/welcom.dart';
 import 'package:mccp_1645/module/intro/intro.dart';
 import 'package:mccp_1645/module/page/home.dart';
 import 'package:mccp_1645/module/splash/splash_page.dart';
-
+import 'package:mccp_1645/module/auth/login.dart';
+import 'package:mccp_1645/module/auth/signup.dart';
 part 'routes.dart';
 
 class AppPages {
@@ -30,6 +32,18 @@ class AppPages {
     GetPage(
       name: Routes.home,
       page: () => const HomePage(),
+    ),
+    GetPage(
+      name: Routes.signup,
+      page:() => const singlePlayer(),
+    ),
+    GetPage(
+        name: Routes.login,
+        page:() => const serverPlayer(),
+    ),
+    GetPage(
+      name: Routes.auth,
+      page:() => const mutiPlayer(),
     ),
   ];
 }

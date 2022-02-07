@@ -15,7 +15,7 @@ class SplashController extends GetxController
     )
       ..forward()
       ..addListener(() {
-        obj = '正在加载${(100 * controller!.value).toStringAsFixed(2)}%';
+        obj = '正加载${(100 * controller!.value).toStringAsFixed(2)}%';
       })
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) Get.offAllNamed(Routes.intro);
