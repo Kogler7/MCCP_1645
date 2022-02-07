@@ -10,12 +10,27 @@ class SplashPage extends GetView<SplashController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Obx(
-          () => Text(
-            controller.obj,
-            style: KTextStyle.titleBold,
-          ),
-        ),
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 100,
+              width: 100,
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.grey[200],
+                valueColor: AlwaysStoppedAnimation(Colors.blue),
+                value: .5,
+              ),
+            ),
+
+            Obx(
+                  () => Text(
+                controller.obj,
+                style: KTextStyle.titleBold,
+              ),
+            ),
+          ],
+        )
       ),
     );
   }
