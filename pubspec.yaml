@@ -33,3 +33,5 @@ flutter:
   assets:
     - assets/avatars/
     - assets/intro/
+    - assets/auth/images/
+    - assets/auth/icons/
