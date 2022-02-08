@@ -63,22 +63,22 @@ class _HomePageState extends State<HomePage> {
       },
       items: [
         AnimatedBarItem(
-          icon: const Icon(KIcon.pageRecommend),
+          icon: const Icon(KTabIcon.recommend),
           title: Text(titles[0]),
           activeColor: const Color(0xffF4D144),
         ),
         AnimatedBarItem(
-          icon: const Icon(KIcon.pageCrafting),
+          icon: const Icon(KTabIcon.myBase),
           title: Text(titles[1]),
           activeColor: Colors.greenAccent,
         ),
         AnimatedBarItem(
-          icon: const Icon(KIcon.pageNotices),
+          icon: const Icon(KTabIcon.notice),
           title: Text(titles[2]),
           activeColor: Colors.pink,
         ),
         AnimatedBarItem(
-          icon: const Icon(KIcon.pageMe),
+          icon: const Icon(KTabIcon.me),
           title: Text(titles[3]),
           activeColor: Colors.blueAccent,
         ),

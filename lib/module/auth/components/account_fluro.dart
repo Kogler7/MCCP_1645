@@ -1,13 +1,12 @@
-//@dart=2.9
 import 'package:flutter/material.dart';
 import 'package:mccp_1645/config/export.dart';
-class AlreadyHaveAnAccountCheck extends StatelessWidget {
+class AccountFluro extends StatelessWidget {
   final bool login;
-  final Function press;
-  const AlreadyHaveAnAccountCheck({
-    Key key,
+  final Function() press;
+  const AccountFluro({
+    Key? key,
     this.login = true,
-    this.press,
+    required this.press,
   }) : super(key: key);
 
   @override
@@ -17,13 +16,13 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
       children: <Widget>[
         Text(
           login ? "还没有账号? " : "已经有账号? ",
-          style: TextStyle(color: KColor.darkButton),
+          style: const TextStyle(color: KColor.darkButton),
         ),
         GestureDetector(
           onTap: press,
           child: Text(
             login ? " 注册" : " 登录",
-            style: TextStyle(
+            style: const TextStyle(
               color: KColor.darkButton,
               fontWeight: FontWeight.bold,
             ),

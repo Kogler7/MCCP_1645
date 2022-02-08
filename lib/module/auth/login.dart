@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:mccp_1645/module/auth/loginbackground.dart';
+import 'package:mccp_1645/module/auth/components/log_in_others.dart';
 import 'package:mccp_1645/module/auth/signup.dart';
-import 'package:mccp_1645/module/auth/components/already_have_an_account_acheck.dart';
-import 'package:mccp_1645/module/auth/components/rounded_button.dart';
-import 'package:mccp_1645/module/auth/components/rounded_input_field.dart';
-import 'package:mccp_1645/module/auth/components/rounded_password_field.dart';
+import 'package:mccp_1645/module/auth/components/account_fluro.dart';
+import 'package:mccp_1645/module/auth/components/input_field.dart';
+import 'package:mccp_1645/module/auth/components/password_field.dart';
 import 'package:mccp_1645/config/export.dart';
-import 'package:mccp_1645/module/auth/signup_social_icon.dart';
-import 'signup_or_divider.dart';
-class serverPlayer extends StatefulWidget {
-  const serverPlayer({Key? key}) : super(key: key);
+import 'package:mccp_1645/shared/widget/button/rounded_button.dart';
+
+import 'components/background.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _serverPlayerState createState() => _serverPlayerState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _serverPlayerState extends State<serverPlayer> {
-
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,63 +28,46 @@ class _serverPlayerState extends State<serverPlayer> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(height: size.height * 0.05),
-              Text(
-                "登录",
-                style:KTextStyle.titleBold
-                // style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              const Text("登录", style: KTextStyle.titleBold
+                  // style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
               SizedBox(height: size.height * 0.01),
-              Image.asset(
-                "assets/auth/images/login.png",
-                height: size.height * 0.35,
+              Image(
+                image: KAuthImage.signUp,
+                width: size.height * 0.35,
               ),
               SizedBox(height: size.height * 0.03),
               RoundedInputField(
                 hintText: "电子邮件",
                 onChanged: (value) {},
               ),
-              RoundedPasswordField(
+              PasswordField(
                 onChanged: (value) {},
               ),
               SizedBox(height: size.height * 0.03),
-              GradientBtnWidget(
+              RoundedButton(
                 width: 208,
-                child: Text('登录',style:TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color:Colors.white)),
+                title: '登录',
+                style: KTextStyle.authButtonWhite,
+                gradient: KGradient.authButton,
+                shadows: KBoxShadow.authButton,
                 onTap: () {},
               ),
               SizedBox(height: size.height * 0.03),
-              AlreadyHaveAnAccountCheck(
+              AccountFluro(
                 press: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return singlePlayer();
+                        return const SignUpPage();
                       },
                     ),
                   );
                 },
               ),
               SizedBox(height: size.height * 0.05),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  LineWidget(),
-                  SocalIcon(
-                    iconSrc: "assets/auth/icons/facebook.svg",
-                    press: () {},
-                  ),
-                  SocalIcon(
-                    iconSrc: "assets/auth/icons/twitter.svg",
-                    press: () {},
-                  ),
-                  SocalIcon(
-                    iconSrc: "assets/auth/icons/google-plus.svg",
-                    press: () {},
-                  ),
-                  LineWidget(),
-                ],
-              )
+              const LogInOtherChoice(),
             ],
           ),
         ),
