@@ -18,7 +18,7 @@ class SplashPage extends GetView<SplashController> {
               width: 100,
               child: CircularProgressIndicator(
                 backgroundColor: Colors.grey[200],
-                valueColor: AlwaysStoppedAnimation(Colors.blue),
+                valueColor: const AlwaysStoppedAnimation(Colors.blue),
                 value: .5,
               ),
             ),

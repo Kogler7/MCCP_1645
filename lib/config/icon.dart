@@ -7,6 +7,7 @@ class KTabIcon {
   static const IconData myBase = Icons.album;
   static const IconData notice = Icons.textsms_outlined;
   static const IconData me = Icons.person;
+  static const IconData menu = Icons.menu;
 }
 
 class KAuthSvgAssets {

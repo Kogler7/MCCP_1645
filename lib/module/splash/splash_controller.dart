@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mccp_1645/route/export.dart';
+import 'package:mccp_1645/test/page_test.dart';
 
 class SplashController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -18,7 +19,7 @@ class SplashController extends GetxController
         obj = '正加载${(100 * controller!.value).toStringAsFixed(2)}%';
       })
       ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) Get.offAllNamed(Routes.intro);
+        if (status == AnimationStatus.completed) Get.offAllNamed(Routes.home);
       });
     super.onInit();
   }

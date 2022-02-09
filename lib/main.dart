@@ -1,5 +1,5 @@
 /// Copyright 2022 The 1645 Authors. All rights reserved.
-/// Snapshot 22w04b belongs to Version 0.0.1 alpha 1.
+/// Snapshot 22w04c belongs to Version 0.0.1 alpha 1.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mccp_1645/module/splash/splash_page.dart';

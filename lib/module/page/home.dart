@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mccp_1645/config/color.dart';
 import 'package:mccp_1645/config/icon.dart';
+import 'package:mccp_1645/module/menu/home_scaffold.dart';
 import 'package:mccp_1645/shared/widget/animated_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,26 +18,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(),
-      body: buildBody(),
-      bottomNavigationBar: buildAnimatedBottomBar(),
-      backgroundColor: bgColor,
-    );
-  }
-
-  AppBar buildAppBar() {
-    return AppBar(
-      backgroundColor: bgColor,
-      automaticallyImplyLeading: false,
-      centerTitle: true,
-      title: Text(
+    return HomeScaffold(
+      appBarTitle: Text(
         titles[_currentIndex],
         style: const TextStyle(
           color: Colors.white,
           fontSize: 24,
         ),
       ),
+      body: buildBody(),
+      bottomNavigationBar: buildAnimatedBottomBar(),
+      backgroundColor: bgColor,
     );
   }
 

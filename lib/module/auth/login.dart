@@ -8,6 +8,7 @@ import 'package:mccp_1645/config/export.dart';
 import 'package:mccp_1645/shared/widget/button/rounded_button.dart';
 
 import 'components/background.dart';
+import 'components/password_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
