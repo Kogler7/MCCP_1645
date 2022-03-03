@@ -96,7 +96,7 @@ class _SideMenuState extends State<SideMenu> {
   }
 
   List<Widget> buildScopes() {
-    const double width = 260;
+    const double width = 280;
     return <Widget>[
       FlatTitledScope(
         width: width,

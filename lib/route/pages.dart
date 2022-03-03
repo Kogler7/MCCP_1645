@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:mccp_1645/config/binding.dart';
 import 'package:mccp_1645/module/auth/welcome.dart';
 import 'package:mccp_1645/module/intro/intro.dart';
-import 'package:mccp_1645/module/page/home.dart';
+import 'package:mccp_1645/module/tab/home.dart';
 import 'package:mccp_1645/module/splash/splash_page.dart';
 import 'package:mccp_1645/module/auth/login.dart';
 import 'package:mccp_1645/module/auth/signup.dart';

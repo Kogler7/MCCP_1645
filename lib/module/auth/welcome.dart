@@ -42,7 +42,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 gradient: KGradient.authButton,
                 shadows: KBoxShadow.authButton,
                 onTap: () {
-                  Get.to(const LoginPage());
+                  Get.off(const LoginPage());
                 },
               ),
               const SizedBox(height: 16),
@@ -53,7 +53,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 style: KTextStyle.authButtonDark,
                 shadows: KBoxShadow.authButton,
                 onTap: () {
-                  Get.to(const SignUpPage());
+                  Get.off(const SignUpPage());
                 },
               ),
             ],

@@ -37,9 +37,12 @@ class FlatListTile extends StatelessWidget {
                   ? const Icon(
                       Icons.arrow_forward_ios_outlined,
                       color: Colors.grey,
-                      size: 20,
+                      size: 16,
                     )
                   : const Text(''),
+              const SizedBox(
+                width: 10,
+              )
             ],
           ),
         ),

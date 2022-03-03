@@ -8,7 +8,7 @@ class FlatTitledScope extends StatelessWidget {
 
   const FlatTitledScope({
     Key? key,
-    this.width = 200, //不起作用
+    this.width = 200,
     this.title = "",
     required this.tiles,
     this.backColor = Colors.transparent,

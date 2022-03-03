@@ -3,6 +3,7 @@ import 'package:mccp_1645/config/color.dart';
 import 'package:mccp_1645/config/icon.dart';
 import 'package:mccp_1645/module/menu/home_scaffold.dart';
 import 'package:mccp_1645/shared/widget/animated_bar.dart';
+import 'package:mccp_1645/test/widget_test.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,13 +34,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildBody() {
-    return Center(
-      child: Text(
-        titles[_currentIndex],
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-      ),
+    return const Center(
+      child: TestWidget(),
     );
   }
 

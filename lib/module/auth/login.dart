@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mccp_1645/module/auth/components/log_in_others.dart';
 import 'package:mccp_1645/module/auth/signup.dart';
 import 'package:mccp_1645/module/auth/components/account_fluro.dart';
 import 'package:mccp_1645/module/auth/components/input_field.dart';
 import 'package:mccp_1645/module/auth/components/password_field.dart';
 import 'package:mccp_1645/config/export.dart';
+import 'package:mccp_1645/route/export.dart';
 import 'package:mccp_1645/shared/widget/button/rounded_button.dart';
 
 import 'components/background.dart';
@@ -52,7 +54,9 @@ class _LoginPageState extends State<LoginPage> {
                 style: KTextStyle.authButtonWhite,
                 gradient: KGradient.authButton,
                 shadows: KBoxShadow.authButton,
-                onTap: () {},
+                onTap: () {
+                  Get.offAllNamed(Routes.home);
+                },
               ),
               SizedBox(height: size.height * 0.03),
               AccountFluro(
