@@ -6,6 +6,7 @@ import 'package:mccp_1645/module/tab/home.dart';
 import 'package:mccp_1645/module/splash/splash_page.dart';
 import 'package:mccp_1645/module/auth/login.dart';
 import 'package:mccp_1645/module/auth/signup.dart';
+import 'package:mccp_1645/test/page_test.dart';
 part 'routes.dart';
 
 class AppPages {
@@ -19,6 +20,10 @@ class AppPages {
     GetPage(
       name: Routes.intro,
       page: () => const AnimatedIntroductionScreen(),
+    ),
+    GetPage(
+      name: Routes.test,
+      page: () => const TestPage(),
     ),
     // GetPage(
     //   name: Routes.auth,

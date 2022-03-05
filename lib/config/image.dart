@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 ///图片常量
@@ -32,4 +34,12 @@ class KAuthImage {
   static const AssetImage login = AssetImage("assets/auth/images/login.png");
   static const AssetImage loginBottom =
       AssetImage("assets/auth/images/login_bottom.png");
+}
+
+class KProjCover {
+  static AssetImage get get =>
+      AssetImage("assets/covers/${Random.secure().nextInt(7)}.jpg");
+
+  static AssetImage byIdx(int idx) =>
+      AssetImage("assets/covers/$idx.jpg");
 }
