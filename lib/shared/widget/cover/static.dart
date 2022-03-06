@@ -18,12 +18,13 @@ List<ProjInfo> projInfoList = <ProjInfo>[
   ProjInfo(tag: "02", imgIdx: 4, name: "灯火里的中国", info: "2022-02-03创建"),
   ProjInfo(tag: "02", imgIdx: 5, name: "这世界那么多人", info: "2022-02-03创建"),
   //,imgIdx:
+  ProjInfo(tag: "", imgIdx: 2, name: "孤勇者", info: "2022-02-03创建"),
+  //,imgIdx:
   ProjInfo(tag: "03", imgIdx: 6, name: "英文集", info: "3 首作品"),
   ProjInfo(tag: "03", imgIdx: 7, name: "Lemon", info: "2022-02-03创建"),
   ProjInfo(tag: "03", imgIdx: 0, name: "Monody", info: "2022-02-03创建"),
   ProjInfo(tag: "03", imgIdx: 1, name: "BLUE", info: "2022-02-03创建"),
-  //,imgIdx:
-  ProjInfo(tag: "", imgIdx: 2, name: "孤勇者", info: "2022-02-03创建"),
+
   //,imgIdx:
   ProjInfo(tag: "04", imgIdx: 3, name: "我爱", info: "8 首作品"),
   ProjInfo(tag: "04", imgIdx: 4, name: "稻香", info: "2022-02-03创建"),

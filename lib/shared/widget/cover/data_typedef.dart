@@ -25,7 +25,6 @@ class ProjCoverState {
   Size size;
   bool grouped;
   bool visible;
-  int layoutIdx;
   Offset offset;
   ProjInfo info;
 
@@ -33,7 +32,6 @@ class ProjCoverState {
     this.size = Size.zero,
     this.grouped = false,
     this.visible = true,
-    this.layoutIdx = 0,
     this.offset = Offset.zero,
     required this.info,
   });

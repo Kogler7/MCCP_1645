@@ -5,6 +5,8 @@ import 'data_typedef.dart';
 
 class StateDelegate {
   List<dynamic> stateList = [];
+  List<ProjInfo> infoList = [];
+
   final LayoutDelegate layoutDelegate;
   final double coverWidth;
   final double infoPadding;
@@ -15,14 +17,16 @@ class StateDelegate {
     this.infoPadding = 120,
   });
 
-  int get length => stateList.length;
+  int get count => stateList.length;
 
-  dynamic at(int idx) => stateList[idx];
+  dynamic stateAt(int idx) => stateList[idx];
 
-  void parse(List<ProjInfo> infoList) {
+  ProjInfo infoAt(int idx) => infoList[idx];
+
+  void parse(List<ProjInfo> src) {
     Size coverSize = Size.square(coverWidth);
     //初始编组
-    for (var info in infoList) {
+    for (var info in src) {
       if (info.tag == "") {
         stateList.add(ProjCoverState(info: info, size: coverSize));
       } else if (stateList.last is! List<ProjCoverState>) {
@@ -30,38 +34,48 @@ class StateDelegate {
           ProjCoverState(info: info, size: coverSize, grouped: true)
         ]);
       } else {
-        assert(stateList.last is List<ProjCoverState>);
-        (stateList.last as List<ProjCoverState>)
-            .add(ProjCoverState(info: info, size: coverSize, grouped: true));
+        if ((stateList.last as List<ProjCoverState>).first.info.tag ==
+            info.tag) {
+          (stateList.last as List<ProjCoverState>)
+              .add(ProjCoverState(info: info, size: coverSize, grouped: true));
+        } else {
+          stateList.add(<ProjCoverState>[
+            ProjCoverState(info: info, size: coverSize, grouped: true)
+          ]);
+        }
       }
     }
+    generateInfo();
     arrangeBase();
   }
 
-  //编号，同时完成布局
+  void generateInfo() {
+    infoList = [];
+    for (var e in stateList) {
+      if (e is ProjCoverState) {
+        infoList.add(e.info);
+      } else {
+        infoList.add((e as List<ProjCoverState>).first.info);
+      }
+    }
+  }
+
+  //布局
   void arrangeBase() {
     for (int i = 0; i < stateList.length; i++) {
       if (stateList[i] is! List<ProjCoverState>) {
-        (stateList[i] as ProjCoverState)
-          ..layoutIdx = i
-          ..offset = layoutDelegate.at(i);
+        (stateList[i] as ProjCoverState).offset = layoutDelegate.at(i);
       } else {
         var list = stateList[i] as List<ProjCoverState>;
-        list[0]
-          ..layoutIdx = i
-          ..offset = layoutDelegate.at(i);
+        list[0].offset = layoutDelegate.at(i);
         for (int j = 1; j < list.length; j++) {
-          list[j]
-            ..layoutIdx = j - 1
-            ..offset = layoutDelegate.at(j - 1);
+          list[j].offset = layoutDelegate.at(j - 1);
         }
       }
     }
   }
 
-  void arrangeAt(int idx){
-    
-  }
+  void arrangeAt(int idx) {}
 
   void save(List<ProjInfo> infoList) {
     return;
@@ -72,7 +86,6 @@ class StateDelegate {
   bool unfold(int idx) {
     var list = stateList[idx];
     if (list is List<ProjCoverState>) {
-
       return true;
     }
     return false;
@@ -80,6 +93,7 @@ class StateDelegate {
 
   void remove(int idx) {
     stateList.removeAt(idx);
+    generateInfo();
     arrangeBase();
   }
 
