@@ -18,7 +18,8 @@ class AnimatedText extends StatefulWidget {
 class _AnimatedTextState extends State<AnimatedText> {
   late Widget oldText;
   late Widget newText;
-  double tgtVal = 0;
+  double tgtVal = 1.0;
+  double nwVal = 0;
 
   @override
   void initState() {
@@ -34,11 +35,12 @@ class _AnimatedTextState extends State<AnimatedText> {
     } else {
       var tmpText = oldText;
       oldText = newText;
-      tgtVal += 1;
+      if (nwVal == tgtVal) tgtVal += 1;
       return TweenAnimationBuilder(
         tween: Tween(begin: 0.0, end: tgtVal),
         duration: widget.duration,
         builder: (ctx, double val, child) {
+          nwVal = val;
           var t = val - val.floor();
           return Opacity(
             opacity: CosValleyCurve.f(t),
